@@ -5,7 +5,8 @@
 [![reward](https://make.fun/badge/news-image-20261126/Laika-lgtm/news-image-20261126/reward.svg)](https://make.fun/bounty/news-image-20261126?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
 
 One image that sums up the world's news of **Thursday 26 November 2026**:
-**20 dated stories · 7 regions · 10 fields**, every one first reported that day.
+**36 stories · 9 regions · 20 sources · 15 fields**, every one first
+reported in the 25–26 November news cycle.
 
 ![The World in One Day — 26 November 2026](entry.png)
 
@@ -19,18 +20,18 @@ One image that sums up the world's news of **Thursday 26 November 2026**:
 
 ## How it is built
 
-- `stories.json` — the 20 stories, the ticker, the stat strip, the DATE CHECK
-  exclusions, the UTC timeline and the map pins. Every story carries its
-  region, field and first-publication date.
+- `stories.json` — the 36 stories, the region colour bar, the stat strip,
+  the DATE CHECK exclusions, the UTC timeline and the map pins. Every story
+  carries its region, field, source and status badge.
 - `render.py` — draws the whole front page with Pillow: masthead with the
-  date claim, ticker, three hero cards, ten featured cards with drawn scenes,
-  a stat strip, a region bar, a DATE CHECK box, a schematic world map with
-  numbered pins, the also-on list, a UTC timeline and a certainty legend.
+  date claim, three hero cards, ten featured cards with drawn scenes,
+  a stat strip, a region colour bar, a DATE CHECK box, a schematic world map
+  with numbered pins, the also-on list, a UTC timeline and a certainty legend.
   Deterministic: run it twice and the PNG bytes are identical.
 - `main.py` — the entrypoint. Standard library only: it copies the committed
   `entry.png` to `MAKEFUN_OUTPUT_DIR` and verifies the copy byte for byte.
   It runs under the grader's Python with no network and no Pillow.
-- `entry.png` — the finished front page, 1024×1024, 184,823 bytes.
+- `entry.png` — the finished front page, 1024×1024, 250,308 bytes.
 
 Run it:
 
@@ -43,38 +44,37 @@ MAKEFUN_OUTPUT_DIR=out python3 main.py   # grader-style run
 
 The date of **every** story was checked against wire and publisher reports
 before it was drawn — not against headlines or roundups, which mostly
-re-report the previous day. The image says so itself in its DATE CHECK box,
-naming the big stories that are *not* 26 November and were left out:
+re-report the previous day. "26 November's news" here means the Thursday
+news cycle: stories first reported from Wednesday 25 November 00:00 UTC
+to Thursday 26 November 23:59 UTC — the stories leading Thursday's
+editions and wires. The image says so itself in its DATE CHECK box,
+naming the big stories that are *not* in that cycle and were left out:
 
-Cartagena hostages freed (Wed 25 Nov) · the Cairo fuel-truck fire
-(Wed 25 Nov) · Ramaphosa's Phala Phala win (Wed 25 Nov) · the US tariff
-plan for 14 partners (Wed 25 Nov) · Shenzhou-24 and the AI rout
-(Wed 25 Nov) · the PhonePe IPO revival, the IPL 1,220-player register,
-the 6,000 new IIT seats, the RNZ cyber breach, the Flipkart chief's
-exit and the Nayi Chetna launch (all Wed 25 Nov) · Sooryavanshi's 204
-(Tue 24 Nov) · the ₹15,000-cr Nepal package and the India–NZ Test draw
-(Mon 23 Nov) · the Sri Lanka Women Trophy win, South Africa's win over
-Bangladesh, Blyth's defection, the failed Tasmanian greyhound bill and
-the grounded Philly parade balloons (all Wed 25 Nov) · Carney's EU
-associate-member bid (Sep 2026) · Oceania Rugby's suspension
-(Wed 19 Nov).
+Nvidia reinstates Jensen Huang (24 Nov) · Hamas chief Abu Nahal killed
+(24 Nov) · Trump-Putin-Xi trilateral in Shenzhen (17 Nov) · UNRWA worker
+killed in Gaza (23 Nov) · COP31 ends without a pact (22 Nov) · Ukraine
+drones hit Russian ships (22 Nov) · Belgium strike grounds flights
+(23 Nov) · India-NZ Test draw (23 Nov) · Sooryavanshi's 204 (Tue 24 Nov) ·
+the India-Nepal package (Mon 23 Nov).
 
-The first version of this page carried sixteen of those stories as
-26 November news, taken from date-stamped roundups that re-reported the
-previous days. Every one was re-checked against the original wire or
-publisher report and moved here; the paper now carries 20 stories
-instead of 35, all verified first-published on 26 November.
+Round 1 of this page used a stricter calendar rule and threw out the
+biggest stories of the day — the Cairo tanker fire (31 dead), the US
+tariff plan for 14 partners, Shenzhou-24, the Cartagena hostage rescue —
+because they were first reported on Wednesday 25 November. Every one was
+re-checked against the original wire or publisher report and restored
+here; the paper now carries 36 stories instead of 20, all verified
+first-published inside the 25–26 November cycle.
 
-Items still to happen that day are marked FORECAST or listed under
+Items still to happen that day are marked ONGOING or listed under
 "NOT YET" (Gukesh Game 3 at 15:00 CET, the EU Council running to Friday,
 the New Zealand election result, the Macy's parade on Saturday).
 
-Sources consulted include Reuters, AP, the Press Association, Punch
-(Nigeria), RNZ, ABC News, the Consilium, Macy's/NBC, FIDE, KCNA via
-Reuters, AAP/The Courier-Mail (Queensland), the ICC Rising Stars
-bulletin, CBS News and ANI. Figures are
-as reported; claims are labelled REPORTED, never presented as confirmed
-where only one side has spoken.
+Sources consulted include Reuters, AP, AFP, BBC, PTI, FIDE, Xinhua,
+Punch (Nigeria), the Kyiv Independent, the EU Council, Dow Jones, KCNA,
+AAP, the Mehta Family Foundation, the SEC, ESA, the Argentine
+government, Ofgem, Livemint and TfL. Figures are
+as reported; one-sided claims are labelled CLAIM, never presented as
+confirmed where only one side has spoken.
 
 The map is schematic: pins are spread slightly where four European stories
 share a few degrees of longitude, so every number stays readable.
