@@ -329,13 +329,72 @@ def scene_moon(draw, x, y, w, h):
     draw.rectangle([x, y + h - 12, x + w, y + h], fill=(12, 14, 26))
 
 
+def scene_siren(draw, x, y, w, h):
+    _sky(draw, x, y, w, h, (214, 232, 244), (178, 205, 228))
+    # road
+    draw.rectangle([x, y + h - 8, x + w, y + h], fill=(90, 90, 96))
+    # ambulance van body
+    bx0, by0 = x + w * 0.30, y + h * 0.18
+    bx1, by1 = x + w * 0.72, y + h * 0.78
+    draw.rectangle([bx0, by0, bx1, by1], fill=(255, 255, 255),
+                   outline=(120, 120, 120))
+    # cab + windshield
+    draw.rectangle([bx1, y + h * 0.38, x + w * 0.80, by1],
+                   fill=(255, 255, 255), outline=(120, 120, 120))
+    draw.polygon([(bx1 + 2, y + h * 0.42), (x + w * 0.79, y + h * 0.42),
+                  (x + w * 0.79, y + h * 0.58), (bx1 + 2, y + h * 0.58)],
+                 fill=(140, 190, 220))
+    # light bar
+    draw.rectangle([x + w * 0.42, by0 - 5, x + w * 0.50, by0], fill=RED)
+    draw.rectangle([x + w * 0.52, by0 - 5, x + w * 0.60, by0],
+                   fill=(40, 90, 200))
+    # red cross on van side
+    cx = x + w * 0.51
+    cy = y + h * 0.48
+    draw.rectangle([cx - 2, cy - 7, cx + 2, cy + 7], fill=RED)
+    draw.rectangle([cx - 7, cy - 2, cx + 7, cy + 2], fill=RED)
+    # wheels
+    for wx in (x + w * 0.38, x + w * 0.74):
+        draw.ellipse([wx - 5, y + h - 13, wx + 5, y + h - 3],
+                     fill=(30, 30, 30))
+
+
+def scene_missile(draw, x, y, w, h):
+    _sky(draw, x, y, w, h, (16, 22, 44), (40, 44, 72))
+    for sx, sy in ((8, 6), (30, 14), (70, 5), (120, 10), (160, 6),
+                   (185, 14)):
+        draw.ellipse([x + sx, y + sy, x + sx + 2, y + sy + 2],
+                     fill=(240, 240, 220))
+    cy = y + h * 0.5
+    # flame + smoke trailing left
+    draw.polygon([(x + w * 0.30, cy - 4), (x + w * 0.30, cy + 4),
+                  (x + w * 0.12, cy)], fill=(255, 170, 40))
+    draw.polygon([(x + w * 0.34, cy - 3), (x + w * 0.34, cy + 3),
+                  (x + w * 0.20, cy)], fill=(255, 220, 90))
+    for sx, sy, r in ((0.16, 0.30, 3), (0.10, 0.62, 2), (0.06, 0.45, 2)):
+        draw.ellipse([x + w * sx - r, y + h * sy - r, x + w * sx + r,
+                      y + h * sy + r], fill=(150, 150, 150))
+    # body
+    draw.rectangle([x + w * 0.34, cy - 6, x + w * 0.74, cy + 6],
+                   fill=(225, 225, 225))
+    # nose cone
+    draw.polygon([(x + w * 0.74, cy - 6), (x + w * 0.74, cy + 6),
+                  (x + w * 0.90, cy)], fill=(200, 60, 60))
+    # fins
+    draw.polygon([(x + w * 0.36, cy - 6), (x + w * 0.30, cy - 13),
+                  (x + w * 0.44, cy - 6)], fill=(180, 180, 180))
+    draw.polygon([(x + w * 0.36, cy + 6), (x + w * 0.30, cy + 13),
+                  (x + w * 0.44, cy + 6)], fill=(180, 180, 180))
+
+
 SCENES = {"parade": scene_parade, "memorial": scene_memorial,
           "chess": scene_chess, "storm": scene_storm,
           "council": scene_council, "market_up": scene_market_up,
           "tube": scene_tube, "guitar": scene_guitar,
           "phone": scene_phone, "cricket": scene_cricket,
           "shield": scene_shield, "market_down": scene_market_down,
-          "moon": scene_moon}
+          "moon": scene_moon, "siren": scene_siren,
+          "missile": scene_missile}
 
 # ---------------------------------------------------------------- map
 CONTINENTS = {
@@ -526,14 +585,14 @@ def build():
     f_dc_i = font_sans(10)
     iy = text_box(d, 26, dy + 26, data["date_check_intro"], f_dc_i, INK,
                   480, 12, max_lines=2)
-    f_dc = font_sans(9)
+    f_dc = font_sans(8)
     ex = data["date_check"]
-    col_w = 244
+    col_w = 160
     for i, item in enumerate(ex):
-        col = i // 5
-        row = i % 5
+        col = i // 7
+        row = i % 7
         ex_x = 26 + col * col_w
-        ex_y = iy + 2 + row * 12
+        ex_y = iy + 2 + row * 11
         d.text((ex_x, ex_y), "✕ " + item, font=f_dc, fill=(90, 40, 40))
     f_ny = font_sans_b(9)
     ny = data["not_yet"]
